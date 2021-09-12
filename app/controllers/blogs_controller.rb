@@ -6,12 +6,21 @@ class BlogsController < ApplicationController
   end
 
   def new
-  end
-  
-  def create
-  end 
+    @blog = Blog.new
 
+  end
+
+  def create
+    blog = Blog.new(blog_params) #1,データを新規登録する為のインスタンス作成
+    blog.save #2,データをデータベースに保存する為のsaveメソッド実行
+    redirect_to blogs_path #3,blogs画面へリダイレクト
+  end
 
   def edit
+  end
+
+  private
+  def blog_params
+    paramas.require(:blog).permit(:title, :category, :body)
   end
 end
