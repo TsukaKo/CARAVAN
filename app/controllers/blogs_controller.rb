@@ -4,6 +4,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    @blog = Blog.find(params[:id])
   end
 
   def new
@@ -14,7 +15,7 @@ class BlogsController < ApplicationController
   def create
     blog = Blog.new(blog_params) #1,データを新規登録する為のインスタンス作成
     blog.save #2,データをデータベースに保存する為のsaveメソッド実行
-    redirect_to blogs_path #3,blogs画面へリダイレクト
+    redirect_to blog_path(blog.id) #3,blogs画面へリダイレクト
   end
 
   def edit
@@ -25,3 +26,4 @@ class BlogsController < ApplicationController
     params.require(:blog).permit(:title, :category, :body)
   end
 end
+
